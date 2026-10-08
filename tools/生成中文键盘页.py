@@ -126,25 +126,9 @@ def main():
     fh.write('    "k","l","m","n","o","p","q","r","s","t","\u21e9",\n')
     fh.write('    "u","v","w","x","y","z","\'","_",".","\u2302"};\n\n')
 
-    # 页指针表：OSK_CHINESE_A 起，每字母指向第 1 页
-    fh.write("/* 每字母第 1 页的指针表，顺序 = OSK_CHINESE_A + i */\n")
-    fh.write("static const char **osk_chinese_first_page[26] = {\n")
-    for ini in 'abcdefghijklmnopqrstuvwxyz':
-        if groups.get(ini):
-            fh.write(f"    chinese_page_{ini}_1,\n")
-        else:
-            fh.write("    NULL,\n")
-    fh.write("};\n\n")
-
-    # 页数表，给切页逻辑用
-    fh.write("/* 每个字母有多少页 */\n")
-    fh.write("static const int osk_chinese_page_count[26] = {\n    ")
-    counts = []
-    for ini in 'abcdefghijklmnopqrstuvwxyz':
-        lst = groups.get(ini, [])
-        counts.append((len(lst) + CHARS_PER_PAGE - 1) // CHARS_PER_PAGE if lst else 0)
-    fh.write(", ".join(str(c) for c in counts))
-    fh.write("\n};\n\n")
+    # ⚠️ 这里不能再输出 osk_chinese_first_page / osk_chinese_page_count：
+    #    input/input_driver.c 里已经有一张同名的 enum 表，重名会编译失败。
+    #    页数信息对切页逻辑没用（切页靠 enum 顺序 + OSK_TYPE_LAST）。
 
     fh.write("#endif\n")
     fh.close()

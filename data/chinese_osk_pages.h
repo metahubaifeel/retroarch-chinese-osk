@@ -476,39 +476,4 @@ static const char *chinese_index_grid[] = {
     "k","l","m","n","o","p","q","r","s","t","⇩",
     "u","v","w","x","y","z","'","_",".","⌂"};
 
-/* 每字母第 1 页的指针表，顺序 = OSK_CHINESE_A + i */
-static const char **osk_chinese_first_page[26] = {
-    chinese_page_a_1,
-    chinese_page_b_1,
-    chinese_page_c_1,
-    chinese_page_d_1,
-    chinese_page_e_1,
-    chinese_page_f_1,
-    chinese_page_g_1,
-    chinese_page_h_1,
-    NULL,
-    chinese_page_j_1,
-    chinese_page_k_1,
-    chinese_page_l_1,
-    chinese_page_m_1,
-    chinese_page_n_1,
-    chinese_page_o_1,
-    chinese_page_p_1,
-    chinese_page_q_1,
-    chinese_page_r_1,
-    chinese_page_s_1,
-    chinese_page_t_1,
-    NULL,
-    NULL,
-    chinese_page_w_1,
-    chinese_page_x_1,
-    chinese_page_y_1,
-    chinese_page_z_1,
-};
-
-/* 每个字母有多少页 */
-static const int osk_chinese_page_count[26] = {
-    1, 3, 3, 3, 1, 2, 3, 3, 0, 5, 2, 4, 2, 2, 1, 2, 3, 1, 5, 3, 0, 0, 2, 3, 4, 5
-};
-
 #endif
